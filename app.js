@@ -5,9 +5,9 @@ class Block {
     this.index = 0;
     this.timestamp = timestamp;
     this.data = data;
-    this.previousHash = "o";
+    this.previousHash = "0";
     this.hash = this.calculateHash();
-    this.nonce = o;
+    this.nonce = 0;
   }
 
   calculateHash() {
@@ -25,7 +25,7 @@ class Blockchain {
   }
 
   createGenesis() {
-    return new Block(o, "01/01/2017", "Genesis block", "o");
+    return new Block(0, "4/18/2026", "Genesis block", "0");
   }
 
   latestBlock() {
@@ -38,7 +38,7 @@ class Blockchain {
     this.chain.push(newBlock);
   }
 
-  checkVaild() {
+  checkValid() {
     for (let i = 1; i < this.chain.length; i++) {
       const currentBlock = this.chain[i];
       const previousBlock = this.chain[i - 1];
@@ -54,3 +54,10 @@ class Blockchain {
     return true;
   }
 }
+
+let jsChain = new Blockchain();
+jsChain.addBlock(new Block("4/18/2026", { amount: 5 }));
+jsChain.addBlock(new Block("4/19/2026", { amount: 10 }));
+
+console.log(JSON.stringify(jsChain, null, 4));
+console.log("Is blockchain valid?" + jsChain.checkValid());
